@@ -1,0 +1,19 @@
+<section class="section-spacing">
+  <div class="page-width rich-text rte">
+    {%- if section.settings.eyebrow != blank -%}<p class="hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+    <h2>{{ section.settings.heading | escape }}</h2>
+    {{ section.settings.text }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Masarima" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A quieter way to shop beautifully useful things" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Pair editorial storytelling with practical merchandising to help customers understand what makes your catalog worth choosing.</p>" }
+  ],
+  "presets": [{ "name": "Rich text" }]
+}
+{% endschema %}

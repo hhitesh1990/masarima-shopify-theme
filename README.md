@@ -4,11 +4,11 @@ Masarima is a production-ready Shopify Online Store 2.0 theme built for modern c
 
 ## Features
 
-- Responsive storefront layout with header, announcement bar, footer, and reusable content sections.
-- Product pages with media gallery, variant selection, quantity controls, pickup-ready semantics, and progressive enhancement.
-- Collection, search, blog, article, page, cart, 404, and list-collections templates.
-- Theme editor settings for brand colors, typography scale, buttons, product cards, and footer content.
-- Accessible skip links, focus states, keyboard-friendly disclosure navigation, and ARIA-aware cart and product controls.
+- Responsive storefront layout with announcement bar, header, footer, and reusable content sections.
+- Product pages with media gallery, variant selection, quantity controls, cart submission, and dynamic checkout support.
+- Collection, search, blog, article, page, cart, password, customer account, and list-collections templates.
+- Theme editor settings for brand colors, typography scale, layout width, buttons, product cards, navigation, and footer content.
+- Accessible skip links, focus states, keyboard-friendly disclosure navigation, structured forms, and localized strings.
 - Performance-minded CSS and JavaScript with no build step required.
 
 ## Development

@@ -1,0 +1,18 @@
+<section class="section-spacing">
+  <div class="page-width customer-layout">
+    <h1>{{ 'templates.customers.login_title' | t }}</h1>
+    <div class="customer-card">
+      {%- form 'customer_login', class: 'product-form' -%}
+        {{ form.errors | default_errors }}
+        <label class="field" for="CustomerEmail">{{ 'templates.customers.email' | t }}<input id="CustomerEmail" type="email" name="customer[email]" autocomplete="email"></label>
+        <label class="field" for="CustomerPassword">{{ 'templates.customers.password' | t }}<input id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password"></label>
+        <button class="button" type="submit">{{ 'templates.customers.sign_in' | t }}</button>
+        <a href="{{ routes.account_register_url }}">{{ 'templates.customers.create_account' | t }}</a>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Customer login" }
+{% endschema %}

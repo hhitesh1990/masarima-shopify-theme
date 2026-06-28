@@ -1,0 +1,17 @@
+<section class="section-spacing">
+  <div class="page-width customer-layout">
+    <h1>Activate account</h1>
+    <div class="customer-card">
+      {%- form 'activate_customer_password', class: 'product-form' -%}
+        {{ form.errors | default_errors }}
+        <label class="field">{{ 'templates.customers.password' | t }}<input type="password" name="customer[password]"></label>
+        <label class="field">Confirm password<input type="password" name="customer[password_confirmation]"></label>
+        <button class="button" type="submit">{{ 'templates.customers.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Activate account" }
+{% endschema %}

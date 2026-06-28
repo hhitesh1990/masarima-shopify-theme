@@ -1,0 +1,7 @@
+.git/
+.github/
+node_modules/
+.DS_Store
+*.log
+README.md
+.theme-check.yml

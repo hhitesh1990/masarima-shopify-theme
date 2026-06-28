@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_background": "#f8f6f1",
+    "color_surface": "#ffffff",
+    "color_text": "#1f2a24",
+    "color_muted_text": "#66736b",
+    "color_border": "#ddd7ca",
+    "color_accent": "#1d6f5f",
+    "color_button_text": "#ffffff",
+    "color_sale": "#b0422d",
+    "page_width": 1240,
+    "spacing_sections": 64,
+    "button_radius": 6,
+    "body_scale": 100,
+    "heading_scale": 104,
+    "product_card_image_ratio": "portrait",
+    "show_dynamic_checkout": true
+  },
+  "presets": {
+    "Default": {}
+  }
+}

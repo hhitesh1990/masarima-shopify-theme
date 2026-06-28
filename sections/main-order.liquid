@@ -1,0 +1,16 @@
+<section class="section-spacing">
+  <div class="page-width customer-layout">
+    <h1>{{ order.name }}</h1>
+    <p>{{ order.created_at | date: format: 'date' }}</p>
+    <div class="customer-card">
+      {%- for line_item in order.line_items -%}
+        <p>{{ line_item.title }} × {{ line_item.quantity }} — {{ line_item.final_line_price | money }}</p>
+      {%- endfor -%}
+      <strong>{{ order.total_price | money_with_currency }}</strong>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Customer order" }
+{% endschema %}

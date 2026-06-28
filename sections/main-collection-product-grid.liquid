@@ -1,0 +1,76 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="section-header">
+      <div>
+        <p class="hero__eyebrow">{{ 'collections.general.collection' | t }}</p>
+        <h1>{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}
+      </div>
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="collection-toolbar">
+        <details class="filter-panel">
+          <summary>{{ 'collections.general.filter_and_sort' | t }}</summary>
+          <form method="get">
+            {%- for filter in collection.filters -%}
+              <details class="filter-group" open>
+                <summary>{{ filter.label }}</summary>
+                <div class="filter-options">
+                  {%- case filter.type -%}
+                    {%- when 'list' -%}
+                      {%- for value in filter.values -%}
+                        <label><input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}> {{ value.label }} ({{ value.count }})</label>
+                      {%- endfor -%}
+                    {%- when 'price_range' -%}
+                      <label>Min <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"></label>
+                      <label>Max <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"></label>
+                  {%- endcase -%}
+                </div>
+              </details>
+            {%- endfor -%}
+            <button class="button" type="submit">{{ 'collections.general.filters' | t }}</button>
+            <a class="button button--secondary" href="{{ collection.url }}">{{ 'collections.general.clear_all' | t }}</a>
+          </form>
+        </details>
+        <form method="get" class="field">
+          <label for="SortBy">{{ 'collections.general.sort_by' | t }}</label>
+          <select id="SortBy" name="sort_by" data-auto-submit>
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            {%- for option in collection.sort_options -%}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{%- endfor -%}
+          </select>
+        </form>
+      </div>
+
+      {%- if collection.filters.size > 0 -%}
+        <div class="active-filters">
+          {%- for filter in collection.filters -%}
+            {%- for value in filter.active_values -%}<a class="active-filter" href="{{ value.url_to_remove }}">{{ value.label }} ×</a>{%- endfor -%}
+            {%- if filter.type == 'price_range' -%}
+              {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}<a class="active-filter" href="{{ filter.url_to_remove }}">{{ 'collections.general.clear' | t }} {{ filter.label }}</a>{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if collection.products_count > 0 -%}
+        <div class="product-grid" style="--columns: {{ section.settings.columns_desktop }};">
+          {%- for product in collection.products -%}{% render 'product-card', product: product %}{%- endfor -%}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {%- else -%}
+        <div class="empty-state"><p>{{ 'collections.general.empty' | t }}</p></div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection product grid",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "range", "id": "columns_desktop", "label": "Desktop columns", "min": 2, "max": 5, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}

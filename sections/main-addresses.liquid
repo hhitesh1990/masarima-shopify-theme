@@ -1,0 +1,31 @@
+<section class="section-spacing">
+  <div class="page-width customer-layout">
+    <h1>{{ 'templates.customers.addresses' | t }}</h1>
+    <div class="address-list">
+      {%- for address in customer.addresses -%}
+        <div class="customer-card">
+          {{ address | format_address }}
+          {%- form 'customer_address', address, class: 'product-form' -%}
+            <button class="button button--secondary" type="submit" name="_method" value="delete">{{ 'cart.general.remove' | t }}</button>
+          {%- endform -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="customer-card" style="margin-top: 1rem;">
+      {%- form 'customer_address', customer.new_address, class: 'product-form' -%}
+        <h2>Add address</h2>
+        <label class="field">{{ 'templates.customers.first_name' | t }}<input type="text" name="address[first_name]"></label>
+        <label class="field">{{ 'templates.customers.last_name' | t }}<input type="text" name="address[last_name]"></label>
+        <label class="field">Address 1<input type="text" name="address[address1]"></label>
+        <label class="field">City<input type="text" name="address[city]"></label>
+        <label class="field">Country<select name="address[country]">{{ country_option_tags }}</select></label>
+        <label class="field">ZIP<input type="text" name="address[zip]"></label>
+        <button class="button" type="submit">{{ 'templates.customers.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Customer addresses" }
+{% endschema %}

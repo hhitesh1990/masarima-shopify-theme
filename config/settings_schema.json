@@ -1,0 +1,54 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Masarima",
+    "theme_version": "1.0.0",
+    "theme_author": "Masarima",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "color", "id": "color_background", "label": "Background", "default": "#f8f6f1" },
+      { "type": "color", "id": "color_surface", "label": "Surface", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#1f2a24" },
+      { "type": "color", "id": "color_muted_text", "label": "Muted text", "default": "#66736b" },
+      { "type": "color", "id": "color_border", "label": "Border", "default": "#ddd7ca" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#1d6f5f" },
+      { "type": "color", "id": "color_button_text", "label": "Button text", "default": "#ffffff" },
+      { "type": "color", "id": "color_sale", "label": "Sale", "default": "#b0422d" }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Page width", "min": 960, "max": 1600, "step": 20, "unit": "px", "default": 1240 },
+      { "type": "range", "id": "spacing_sections", "label": "Section spacing", "min": 28, "max": 96, "step": 4, "unit": "px", "default": 64 },
+      { "type": "range", "id": "button_radius", "label": "Button radius", "min": 0, "max": 36, "step": 2, "unit": "px", "default": 6 },
+      { "type": "range", "id": "body_scale", "label": "Body font scale", "min": 90, "max": 115, "step": 1, "unit": "%", "default": 100 },
+      { "type": "range", "id": "heading_scale", "label": "Heading font scale", "min": 90, "max": 125, "step": 1, "unit": "%", "default": 104 },
+      { "type": "select", "id": "product_card_image_ratio", "label": "Product card image ratio", "default": "portrait", "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" }
+      ]}
+    ]
+  },
+  {
+    "name": "Product forms",
+    "settings": [
+      { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": true }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "url", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" }
+    ]
+  }
+]
