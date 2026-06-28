@@ -5,7 +5,10 @@
       <div class="grid grid--3">
         {%- for article in blog.articles -%}
           <article class="article-card">
-            {%- if article.image -%}<a class="article-card__media" href="{{ article.url }}">{{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 990px) 33vw, 100vw', alt: article.title | escape }}</a>{%- endif -%}
+            {%- if article.image -%}
+              {%- assign article_alt = article.image.alt | default: article.title -%}
+              <a class="article-card__media" href="{{ article.url }}">{{ article.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 990px) 33vw, 100vw', alt: article_alt }}</a>
+            {%- endif -%}
             <h2 class="h3"><a href="{{ article.url }}">{{ article.title }}</a></h2>
             <p>{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
             <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>

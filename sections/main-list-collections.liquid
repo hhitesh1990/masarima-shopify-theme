@@ -5,7 +5,12 @@
       {%- for collection in collections -%}
         {%- unless collection.handle == 'frontpage' -%}
           <a class="collection-card" href="{{ collection.url }}">
-            <div class="collection-card__media">{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection.title | escape }}{% endif %}</div>
+            <div class="collection-card__media">
+              {%- if collection.featured_image -%}
+                {%- assign collection_alt = collection.featured_image.alt | default: collection.title -%}
+                {{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: collection_alt }}
+              {%- endif -%}
+            </div>
             <h2 class="h3">{{ collection.title }}</h2>
           </a>
         {%- endunless -%}

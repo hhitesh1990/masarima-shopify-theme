@@ -2,7 +2,10 @@
   <div class="page-width customer-layout">
     <p class="hero__eyebrow">{{ article.published_at | time_tag: format: 'date' }}</p>
     <h1>{{ article.title }}</h1>
-    {%- if article.image -%}{{ article.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '700, 1000, 1400', sizes: '100vw', alt: article.title | escape }}{%- endif -%}
+    {%- if article.image -%}
+      {%- assign article_alt = article.image.alt | default: article.title -%}
+      {{ article.image | image_url: width: 1400 | image_tag: loading: 'eager', widths: '700, 1000, 1400', sizes: '100vw', alt: article_alt }}
+    {%- endif -%}
     <div class="rte">{{ article.content }}</div>
     <a href="{{ blog.url }}">{{ 'blogs.article.back_to_blog' | t }}</a>
   </div>
