@@ -13,7 +13,7 @@
                 <p>{{ item.final_line_price | money }}</p>
                 <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">{{ 'products.product.quantity' | t }}</label>
                 <div class="quantity" data-quantity>
-                  <button type="button" data-quantity-adjust="-1" aria-label="Decrease quantity">−</button>
+                  <button type="button" data-quantity-adjust="-1" aria-label="Decrease quantity">-</button>
                   <input id="Quantity-{{ item.index | plus: 1 }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
                   <button type="button" data-quantity-adjust="1" aria-label="Increase quantity">+</button>
                 </div>

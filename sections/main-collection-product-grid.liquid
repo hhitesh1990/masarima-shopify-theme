@@ -45,7 +45,7 @@
       {%- if collection.filters.size > 0 -%}
         <div class="active-filters">
           {%- for filter in collection.filters -%}
-            {%- for value in filter.active_values -%}<a class="active-filter" href="{{ value.url_to_remove }}">{{ value.label }} ×</a>{%- endfor -%}
+            {%- for value in filter.active_values -%}<a class="active-filter" href="{{ value.url_to_remove }}">{{ value.label }} &times;</a>{%- endfor -%}
             {%- if filter.type == 'price_range' -%}
               {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}<a class="active-filter" href="{{ filter.url_to_remove }}">{{ 'collections.general.clear' | t }} {{ filter.label }}</a>{%- endif -%}
             {%- endif -%}

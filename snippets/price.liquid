@@ -3,11 +3,12 @@
   assign price = price_product.price
   assign price_min = price_product.price_min
   assign compare_at_price = price_product.compare_at_price
+  assign money_price_min = price_min | money
 -%}
 
 <div class="price{% if compare_at_price > price %} price--on-sale{% endif %}">
   {%- if price_product.price_varies -%}
-    <span>{{ 'products.product.from_price_html' | t: price: price_min | money }}</span>
+    <span>{{ 'products.product.from_price_html' | t: price: money_price_min }}</span>
   {%- elsif compare_at_price > price -%}
     <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
     <span class="price__sale">{{ price | money }}</span>

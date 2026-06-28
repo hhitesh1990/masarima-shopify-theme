@@ -35,8 +35,10 @@
         --page-width: {{ settings.page_width }}px;
         --section-spacing: {{ settings.spacing_sections }}px;
         --radius-button: {{ settings.button_radius }}px;
-        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
-        --font-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+        --font-body-size: {{ settings.body_scale }}%;
+        --heading-large: {{ settings.heading_scale | times: 0.0425 }}rem;
+        --heading-medium: {{ settings.heading_scale | times: 0.0275 }}rem;
+        --heading-small: {{ settings.heading_scale | times: 0.0165 }}rem;
       }
     </style>
     {{ 'theme.css' | asset_url | stylesheet_tag }}
