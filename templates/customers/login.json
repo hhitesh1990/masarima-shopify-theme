@@ -1,6 +1,4 @@
 {
-  "sections": {
-    "main": { "type": "main-login" }
-  },
-  "order": ["main"]
+  "sections": {},
+  "order": []
 }

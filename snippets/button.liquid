@@ -1,0 +1,17 @@
+{%- liquid
+  assign button_label = label | default: 'Button'
+  assign button_style = style | default: 'primary'
+  assign button_classes = 'button'
+  if button_style != 'primary'
+    assign button_classes = button_classes | append: ' button--' | append: button_style
+  endif
+  if full_width
+    assign button_classes = button_classes | append: ' button--full'
+  endif
+-%}
+
+{%- if href != blank -%}
+  <a class="{{ button_classes }}" href="{{ href }}"{% if aria_label != blank %} aria-label="{{ aria_label | escape }}"{% endif %}>{{ button_label }}</a>
+{%- else -%}
+  <button class="{{ button_classes }}" type="{{ type | default: 'button' }}"{% if disabled %} disabled aria-disabled="true"{% endif %}{% if loading %} data-loading-button{% endif %}>{{ button_label }}</button>
+{%- endif -%}

@@ -1,0 +1,8 @@
+.motion-fade, .motion-slide-up, .motion-slide-left, .motion-scale, .motion-blur, .motion-opacity { opacity: 0; transition-duration: var(--duration-base); transition-timing-function: var(--ease-standard); transition-property: opacity, transform, filter; }
+.motion-fade.is-visible, .motion-slide-up.is-visible, .motion-slide-left.is-visible, .motion-scale.is-visible, .motion-blur.is-visible, .motion-opacity.is-visible { opacity: 1; transform: none; filter: none; }
+.motion-slide-up { transform: translateY(var(--space-5)); }
+.motion-slide-left { transform: translateX(var(--space-5)); }
+.motion-scale { transform: scale(0.98); }
+.motion-blur { filter: blur(var(--space-2)); }
+.motion-opacity { transition-property: opacity; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; } .motion-fade, .motion-slide-up, .motion-slide-left, .motion-scale, .motion-blur, .motion-opacity { opacity: 1; transform: none; filter: none; } }

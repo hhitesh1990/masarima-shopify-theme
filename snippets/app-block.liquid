@@ -1,0 +1,5 @@
+{%- if block.type == '@app' -%}
+  <div class="app-block" {{ block.shopify_attributes }}>
+    {% render block %}
+  </div>
+{%- endif -%}

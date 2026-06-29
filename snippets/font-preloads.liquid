@@ -1,0 +1,7 @@
+{%- if settings.preload_body_font -%}
+  <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+{%- endif -%}
+{%- if settings.preload_heading_font and settings.type_heading_font.family != settings.type_body_font.family -%}
+  <link rel="preload" as="font" href="{{ settings.type_heading_font | font_url }}" type="font/woff2" crossorigin>
+{%- endif -%}
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>

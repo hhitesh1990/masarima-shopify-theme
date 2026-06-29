@@ -1,22 +1,31 @@
-# Masarima Shopify Theme
+# MASARIMA Shopify Theme Foundation
 
-Masarima is a production-ready Shopify Online Store 2.0 theme built for modern catalog stores. It includes configurable sections, responsive product and collection templates, accessible navigation, cart support, search, localization, and a focused visual system.
+MASARIMA is a premium skincare Shopify theme foundation based on Dawn-style Online Store 2.0 architecture.
 
-## Features
+This repository currently contains only the global foundation layer. It intentionally does not include homepage sections, product pages, hero sections, merchandising sections, or content sections.
 
-- Responsive storefront layout with announcement bar, header, footer, and reusable content sections.
-- Product pages with media gallery, variant selection, quantity controls, cart submission, and dynamic checkout support.
-- Collection, search, blog, article, page, cart, password, customer account, and list-collections templates.
-- Theme editor settings for brand colors, typography scale, layout width, buttons, product cards, navigation, and footer content.
-- Accessible skip links, focus states, keyboard-friendly disclosure navigation, structured forms, and localized strings.
-- Performance-minded CSS and JavaScript with no build step required.
+## Foundation scope
 
-## Development
+- Global CSS design token system
+- Theme Editor configurable color, typography, spacing, radius, shadow, motion, z-index, and container tokens
+- Reusable button, form, card, image, video, layout, grid, flex, spacing, and animation primitives
+- Liquid snippets for future sections and templates
+- Minimal JavaScript for progressive enhancement only
+- Blank JSON templates for Online Store 2.0 compatibility
 
-This theme is designed to run directly in Shopify without a bundler. Use Shopify CLI when connected to a store:
+## Architecture notes
+
+- No Bootstrap, Tailwind, jQuery, or build step
+- Uses Liquid, CSS custom properties, and vanilla JavaScript
+- Future sections should consume existing tokens and component classes instead of introducing local styling systems
+- Future app-compatible sections can use `snippets/app-block.liquid` as the app block rendering pattern
+
+## Theme development
+
+Use Shopify CLI against a development store:
 
 ```sh
 shopify theme dev
 ```
 
-Before publishing, review theme settings in the Shopify theme editor and replace placeholder copy/images with store-specific content.
+Before adding storefront sections, validate that new work uses the foundation tokens in `snippets/css-variables.liquid` and the component assets in `assets/`.

@@ -1,0 +1,17 @@
+{%- liquid
+  assign video_autoplay = autoplay | default: settings.video_autoplay_default
+  assign video_loop = loop | default: settings.video_loop_default
+  assign video_controls = controls | default: true
+  assign poster_image = poster | default: video.preview_image
+-%}
+
+<deferred-media class="video" data-video-lazy>
+  {%- if poster_image != blank -%}
+    <div class="media media--wide media__poster">
+      {% render 'responsive-image', image: poster_image, loading: 'lazy', sizes: '100vw' %}
+    </div>
+  {%- endif -%}
+  <template>
+    {{ video | video_tag: autoplay: video_autoplay, loop: video_loop, muted: video_autoplay, controls: video_controls, image_size: '1600x' }}
+  </template>
+</deferred-media>

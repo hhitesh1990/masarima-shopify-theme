@@ -1,0 +1,11 @@
+.card { display: grid; gap: var(--space-4); min-width: 0; padding: var(--space-5); border: var(--border-width-card) solid rgb(var(--color-border)); border-radius: var(--radius-card); background: rgb(var(--color-surface)); color: rgb(var(--color-text-primary)); box-shadow: var(--shadow-xs); transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard); }
+.card:hover { border-color: rgba(var(--color-accent), 0.36); box-shadow: var(--shadow-sm); }
+.card__media { overflow: hidden; border-radius: var(--radius-media); background: rgb(var(--color-surface-alt)); }
+.card__eyebrow { margin: var(--space-0); color: rgb(var(--color-text-muted)); font-family: var(--font-caption-family); font-size: var(--font-caption-size); letter-spacing: var(--letter-spacing-button); text-transform: uppercase; }
+.card__title { margin: var(--space-0); }
+.card__text { color: rgb(var(--color-text-muted)); }
+.product-card, .review-card, .ingredient-card, .science-card, .article-card { display: grid; gap: var(--space-4); min-width: 0; }
+.product-card__media, .article-card__media, .ingredient-card__media, .science-card__media { overflow: hidden; border-radius: var(--radius-media); background: rgb(var(--color-surface-alt)); }
+.product-card__meta, .review-card__meta, .ingredient-card__meta, .science-card__meta, .article-card__meta { display: grid; gap: var(--space-2); }
+.product-card__title, .review-card__title, .ingredient-card__title, .science-card__title, .article-card__title { margin: var(--space-0); }
+.product-card__price, .review-card__rating, .ingredient-card__source, .science-card__citation, .article-card__date { color: rgb(var(--color-text-muted)); font-size: var(--font-caption-size); }

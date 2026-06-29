@@ -1,0 +1,16 @@
+.field { display: grid; gap: var(--space-2); }
+.field__label { color: rgb(var(--color-text-primary)); font-weight: var(--font-body-weight-bold); }
+.field__control, .input, input[type='text'], input[type='email'], input[type='password'], input[type='search'], input[type='tel'], input[type='url'], input[type='number'], textarea, select { width: 100%; min-height: calc(var(--space-unit) * 3); padding-block: var(--space-3); padding-inline: var(--space-4); border: var(--border-width-input) solid rgb(var(--color-border)); border-radius: var(--radius-input); background: rgb(var(--color-surface)); color: rgb(var(--color-text-primary)); transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard); }
+textarea, .textarea { min-height: calc(var(--space-unit) * 8); resize: vertical; }
+.field__control::placeholder, .input::placeholder, textarea::placeholder { color: rgb(var(--color-text-muted)); opacity: 1; }
+.field__control:hover, .input:hover, textarea:hover, select:hover { border-color: rgb(var(--color-text-muted)); }
+.field__control:focus, .input:focus, textarea:focus, select:focus { border-color: rgb(var(--color-accent)); box-shadow: 0 0 0 var(--focus-ring-width) rgba(var(--color-accent), 0.16); }
+.field--error .field__control, .field--error .input { border-color: rgb(var(--color-error)); }
+.field__message { margin: var(--space-0); color: rgb(var(--color-text-muted)); font-size: var(--font-caption-size); }
+.field__message--error { color: rgb(var(--color-error)); }
+.checkbox, .radio { display: inline-flex; align-items: center; gap: var(--space-2); }
+.checkbox input, .radio input { inline-size: var(--space-4); block-size: var(--space-4); accent-color: rgb(var(--color-accent)); }
+.form-status { padding: var(--space-4); border: var(--border-width-hairline) solid rgb(var(--color-border)); border-radius: var(--radius-base); background: rgb(var(--color-surface-alt)); }
+.form-status--success { border-color: rgb(var(--color-success)); }
+.form-status--warning { border-color: rgb(var(--color-warning)); }
+.form-status--error { border-color: rgb(var(--color-error)); }

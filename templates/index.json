@@ -1,11 +1,4 @@
 {
-  "sections": {
-    "hero": { "type": "hero-banner" },
-    "featured_collection": { "type": "featured-collection" },
-    "image_with_text": { "type": "image-with-text" },
-    "rich_text": { "type": "rich-text" },
-    "featured_blog": { "type": "featured-blog" },
-    "newsletter": { "type": "newsletter" }
-  },
-  "order": ["hero", "featured_collection", "image_with_text", "rich_text", "featured_blog", "newsletter"]
+  "sections": {},
+  "order": []
 }

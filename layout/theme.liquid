@@ -4,56 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <meta name="theme-color" content="{{ settings.color_background }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    <title>
-      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
-    </title>
-
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
-
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {%- render 'meta-tags' -%}
+    {%- render 'font-preloads' -%}
     {{ content_for_header }}
+    {%- render 'css-variables' -%}
 
-    <style>
-      :root {
-        --color-background: {{ settings.color_background }};
-        --color-surface: {{ settings.color_surface }};
-        --color-text: {{ settings.color_text }};
-        --color-muted: {{ settings.color_muted_text }};
-        --color-border: {{ settings.color_border }};
-        --color-accent: {{ settings.color_accent }};
-        --color-accent-contrast: {{ settings.color_button_text }};
-        --color-sale: {{ settings.color_sale }};
-        --page-width: {{ settings.page_width }}px;
-        --section-spacing: {{ settings.spacing_sections }}px;
-        --radius-button: {{ settings.button_radius }}px;
-        --font-body-size: {{ settings.body_scale }}%;
-        --heading-large: {{ settings.heading_scale | times: 0.0425 }}rem;
-        --heading-medium: {{ settings.heading_scale | times: 0.0275 }}rem;
-        --heading-small: {{ settings.heading_scale | times: 0.0165 }}rem;
-      }
-    </style>
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
-    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'component-button.css' | asset_url | stylesheet_tag }}
+    {{ 'component-form.css' | asset_url | stylesheet_tag }}
+    {{ 'component-card.css' | asset_url | stylesheet_tag }}
+    {{ 'component-media.css' | asset_url | stylesheet_tag }}
+    {{ 'utilities.css' | asset_url | stylesheet_tag }}
+    {{ 'animations.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
   </head>
 
-  <body class="template-{{ template.name | handle }}">
-    <a class="skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
-    {% section 'announcement-bar' %}
-    {% section 'header' %}
+  <body class="template-{{ template.name | handle }}" data-animations="{{ settings.enable_animations }}">
+    <a class="skip-to-content-link button button--text" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
 
     <main id="MainContent" class="main-content" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-
-    {% section 'footer' %}
   </body>
 </html>

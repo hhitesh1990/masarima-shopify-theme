@@ -1,0 +1,6 @@
+<article class="review-card card" data-card-type="review">
+  {%- if rating != blank -%}<p class="review-card__rating" aria-label="{{ rating }} out of 5">{{ rating }} / 5</p>{%- endif -%}
+  {%- if title != blank -%}<h3 class="review-card__title h5">{{ title }}</h3>{%- endif -%}
+  {%- if body != blank -%}<div class="card__text rte">{{ body }}</div>{%- endif -%}
+  {%- if author != blank -%}<p class="card__eyebrow">{{ author }}</p>{%- endif -%}
+</article>

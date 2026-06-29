@@ -1,0 +1,11 @@
+{%- liquid
+  assign image_loading = loading | default: settings.image_loading_strategy
+  assign image_widths = widths | default: '320, 480, 640, 800, 1000, 1400, 1800'
+  assign image_sizes = sizes | default: '100vw'
+  assign image_alt = alt | default: image.alt | default: ''
+  assign image_width = width | default: 1800
+-%}
+
+{%- if image != blank -%}
+  {{ image | image_url: width: image_width | image_tag: loading: image_loading, widths: image_widths, sizes: image_sizes, alt: image_alt }}
+{%- endif -%}

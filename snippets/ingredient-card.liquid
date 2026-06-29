@@ -1,0 +1,9 @@
+<article class="ingredient-card card" data-card-type="ingredient">
+  {%- if image != blank -%}<div class="ingredient-card__media media media--square">{% render 'responsive-image', image: image, sizes: '(min-width: 990px) 25vw, 50vw', alt: title %}</div>{%- endif -%}
+  <div class="ingredient-card__meta">
+    {%- if eyebrow != blank -%}<p class="card__eyebrow">{{ eyebrow }}</p>{%- endif -%}
+    {%- if title != blank -%}<h3 class="ingredient-card__title h5">{{ title }}</h3>{%- endif -%}
+    {%- if body != blank -%}<div class="card__text rte">{{ body }}</div>{%- endif -%}
+    {%- if source != blank -%}<p class="ingredient-card__source">{{ source }}</p>{%- endif -%}
+  </div>
+</article>

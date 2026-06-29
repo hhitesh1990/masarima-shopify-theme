@@ -1,0 +1,39 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { min-height: 100%; font-size: var(--font-root-size); scroll-behavior: smooth; }
+body { min-height: 100%; margin: var(--space-0); background: rgb(var(--color-background)); color: rgb(var(--color-text-primary)); font-family: var(--font-body-family); font-style: var(--font-body-style); font-weight: var(--font-body-weight); font-size: var(--font-body-size); line-height: var(--line-height-body); text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+body.is-locked { overflow: hidden; }
+.no-js:not(html) { display: none; }
+html.no-js .no-js:not(html) { display: block; }
+html.no-js .no-js-hidden { display: none; }
+img, picture, video, canvas, svg, model-viewer { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { border: var(--space-0); background: none; cursor: pointer; }
+button:disabled, [aria-disabled='true'] { cursor: not-allowed; }
+a { color: inherit; text-decoration-thickness: var(--border-width-hairline); text-underline-offset: var(--space-1); }
+summary { cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+[hidden] { display: none !important; }
+:focus { outline: none; }
+:focus-visible { outline: var(--focus-ring-width) solid rgb(var(--color-accent)); outline-offset: var(--space-1); }
+::selection { background: rgba(var(--color-accent), 0.18); color: rgb(var(--color-accent-text)); }
+h1, h2, h3, h4, h5, h6, .display, .h1, .h2, .h3, .h4, .h5, .h6 { margin-block: var(--space-0) var(--space-4); font-family: var(--font-heading-family); font-style: var(--font-heading-style); font-weight: var(--font-heading-weight); line-height: var(--line-height-heading); letter-spacing: var(--letter-spacing-heading); }
+.display { font-size: clamp(var(--font-display-min), calc(var(--font-display-min) + var(--font-fluid-factor)), var(--font-display-max)); }
+h1, .h1 { font-size: clamp(var(--font-h1-min), calc(var(--font-h1-min) + var(--font-fluid-factor)), var(--font-h1-max)); }
+h2, .h2 { font-size: clamp(var(--font-h2-min), calc(var(--font-h2-min) + var(--font-fluid-factor)), var(--font-h2-max)); }
+h3, .h3 { font-size: clamp(var(--font-h3-min), calc(var(--font-h3-min) + var(--font-fluid-factor)), var(--font-h3-max)); }
+h4, .h4 { font-size: clamp(var(--font-h4-min), calc(var(--font-h4-min) + var(--font-fluid-factor)), var(--font-h4-max)); }
+h5, .h5 { font-size: clamp(var(--font-h5-min), calc(var(--font-h5-min) + var(--font-fluid-factor)), var(--font-h5-max)); }
+h6, .h6 { font-size: clamp(var(--font-h6-min), calc(var(--font-h6-min) + var(--font-fluid-factor)), var(--font-h6-max)); }
+p { margin-block: var(--space-0) var(--space-4); }
+.caption { font-family: var(--font-caption-family); font-size: var(--font-caption-size); color: rgb(var(--color-text-muted)); line-height: var(--line-height-body); }
+.rte > *:first-child { margin-block-start: var(--space-0); }
+.rte > *:last-child { margin-block-end: var(--space-0); }
+.main-content { min-height: 60vh; }
+.skip-to-content-link { position: fixed; inset-block-start: var(--space-4); inset-inline-start: var(--space-4); z-index: var(--z-skip-link); transform: translateY(calc(-100% - var(--space-8))); }
+.skip-to-content-link:focus { transform: translateY(var(--space-0)); }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: var(--space-0); margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: var(--space-0); }
+.color-background { background: rgb(var(--color-background)); color: rgb(var(--color-text-primary)); }
+.color-surface { background: rgb(var(--color-surface)); color: rgb(var(--color-text-primary)); }
+.color-surface-alt { background: rgb(var(--color-surface-alt)); color: rgb(var(--color-text-primary)); }
+.glass-surface { background: rgba(var(--color-glass-background), var(--alpha-glass-background)); border: var(--border-width-hairline) solid rgba(var(--color-glass-border), var(--alpha-glass-border)); backdrop-filter: blur(var(--space-4)); }

@@ -1,32 +1,14 @@
-{%- liquid
-  assign card_product = product
-  assign ratio = settings.product_card_image_ratio
-  if ratio == 'square'
-    assign ratio_value = '1 / 1'
-  elsif ratio == 'landscape'
-    assign ratio_value = '4 / 3'
-  else
-    assign ratio_value = '4 / 5'
-  endif
--%}
-
-<article class="product-card" style="--card-ratio: {{ ratio_value }};">
-  <a class="product-card__media" href="{{ card_product.url }}" aria-label="{{ card_product.title | escape }}">
-    {%- if card_product.featured_media -%}
-      {%- assign image_alt = card_product.featured_media.alt | default: card_product.title | escape -%}
-      {{ card_product.featured_media.preview_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '320, 480, 640, 720', sizes: '(min-width: 990px) 25vw, 50vw', alt: image_alt }}
+{%- if product != blank -%}
+  <article class="product-card card" data-card-type="product">
+    {%- if product.featured_media != blank -%}
+      <a class="product-card__media media media--{{ settings.default_media_ratio }}" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+        {% render 'responsive-image', image: product.featured_media.preview_image, sizes: '(min-width: 990px) 25vw, 50vw', alt: product.title %}
+      </a>
     {%- endif -%}
-    {%- if card_product.compare_at_price > card_product.price -%}
-      <span class="product-card__badge">Sale</span>
-    {%- elsif card_product.available == false -%}
-      <span class="product-card__badge">{{ 'products.product.sold_out' | t }}</span>
-    {%- endif -%}
-  </a>
-  <div class="product-card__content">
-    {%- if card_product.vendor != blank -%}
-      <p class="product-card__vendor">{{ card_product.vendor }}</p>
-    {%- endif -%}
-    <h3 class="product-card__title"><a href="{{ card_product.url }}">{{ card_product.title }}</a></h3>
-    {% render 'price', product: card_product %}
-  </div>
-</article>
+    <div class="product-card__meta">
+      {%- if product.vendor != blank -%}<p class="card__eyebrow">{{ product.vendor }}</p>{%- endif -%}
+      <h3 class="product-card__title h5"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      <p class="product-card__price">{{ product.price | money }}</p>
+    </div>
+  </article>
+{%- endif -%}

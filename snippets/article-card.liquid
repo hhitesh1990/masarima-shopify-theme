@@ -1,0 +1,14 @@
+{%- if article != blank -%}
+  <article class="article-card card" data-card-type="article">
+    {%- if article.image != blank -%}
+      <a class="article-card__media media media--landscape" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+        {% render 'responsive-image', image: article.image, sizes: '(min-width: 990px) 33vw, 100vw', alt: article.title %}
+      </a>
+    {%- endif -%}
+    <div class="article-card__meta">
+      <p class="article-card__date">{{ article.published_at | time_tag: format: 'date' }}</p>
+      <h3 class="article-card__title h5"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+      {%- if article.excerpt_or_content != blank -%}<p class="card__text">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>{%- endif -%}
+    </div>
+  </article>
+{%- endif -%}
