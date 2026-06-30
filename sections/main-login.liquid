@@ -1,0 +1,25 @@
+<section class="section-spacing">
+  <div class="container--narrow">
+    <h1>{{ 'customer.login_page.title' | t }}</h1>
+    {%- form 'customer_login' -%}
+      {{ form.errors | default_errors }}
+      <div class="field mb-4">
+        <label class="field__label" for="CustomerEmail">{{ 'customer.login_page.email' | t }}</label>
+        <input class="input" id="CustomerEmail" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field mb-4">
+        <label class="field__label" for="CustomerPassword">{{ 'customer.login_page.password' | t }}</label>
+        <input class="input" id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <button class="button" type="submit">{{ 'customer.login_page.sign_in' | t }}</button>
+      <a class="button button--text" href="{{ routes.account_register_url }}">{{ 'customer.login_page.create_account' | t }}</a>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main login",
+  "settings": []
+}
+{% endschema %}

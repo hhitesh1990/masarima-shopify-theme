@@ -1,0 +1,21 @@
+<section class="section-spacing">
+  <div class="container">
+    <h1>{{ 'customer.addresses.title' | t }}</h1>
+    <div class="grid grid--3">
+      {%- for address in customer.addresses -%}
+        <article class="card">
+          {%- if address == customer.default_address -%}<p class="caption">{{ 'customer.addresses.default' | t }}</p>{%- endif -%}
+          {{ address | format_address }}
+        </article>
+      {%- endfor -%}
+    </div>
+    <a class="button button--text mt-6" href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main addresses",
+  "settings": []
+}
+{% endschema %}

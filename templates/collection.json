@@ -1,4 +1,8 @@
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "main": {
+      "type": "main-collection-product-grid"
+    }
+  },
+  "order": ["main"]
 }

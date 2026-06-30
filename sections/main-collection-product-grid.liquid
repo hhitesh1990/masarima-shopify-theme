@@ -1,0 +1,24 @@
+<section class="section-spacing">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}<div class="rte mb-6">{{ collection.description }}</div>{%- endif -%}
+    {%- paginate collection.products by 24 -%}
+      {%- if collection.products.size > 0 -%}
+        <div class="grid grid--4">
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p>{{ 'sections.collection_template.empty' | t }}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection grid",
+  "settings": []
+}
+{% endschema %}

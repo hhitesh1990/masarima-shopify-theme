@@ -1,0 +1,32 @@
+<section class="section-spacing">
+  <div class="container--narrow">
+    <h1>{{ 'customer.register.title' | t }}</h1>
+    {%- form 'create_customer' -%}
+      {{ form.errors | default_errors }}
+      <div class="field mb-4">
+        <label class="field__label" for="RegisterFirstName">{{ 'customer.register.first_name' | t }}</label>
+        <input class="input" id="RegisterFirstName" type="text" name="customer[first_name]" autocomplete="given-name">
+      </div>
+      <div class="field mb-4">
+        <label class="field__label" for="RegisterLastName">{{ 'customer.register.last_name' | t }}</label>
+        <input class="input" id="RegisterLastName" type="text" name="customer[last_name]" autocomplete="family-name">
+      </div>
+      <div class="field mb-4">
+        <label class="field__label" for="RegisterEmail">{{ 'customer.register.email' | t }}</label>
+        <input class="input" id="RegisterEmail" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field mb-4">
+        <label class="field__label" for="RegisterPassword">{{ 'customer.register.password' | t }}</label>
+        <input class="input" id="RegisterPassword" type="password" name="customer[password]" autocomplete="new-password" required>
+      </div>
+      <button class="button" type="submit">{{ 'customer.register.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main register",
+  "settings": []
+}
+{% endschema %}
