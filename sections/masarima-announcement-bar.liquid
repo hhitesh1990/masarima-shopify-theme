@@ -1,0 +1,61 @@
+{%- if section.settings.enabled -%}
+  <aside
+    class="mas-announcement"
+    data-mas-announcement
+    data-section-id="{{ section.id }}"
+    style="
+      --mas-announcement-bg: {{ section.settings.background_color.red }}, {{ section.settings.background_color.green }}, {{ section.settings.background_color.blue }};
+      --mas-announcement-text: {{ section.settings.text_color.red }}, {{ section.settings.text_color.green }}, {{ section.settings.text_color.blue }};
+      --mas-announcement-border: {{ section.settings.border_color.red }}, {{ section.settings.border_color.green }}, {{ section.settings.border_color.blue }};
+      --mas-announcement-padding-y: {{ section.settings.padding_y }}px;
+    "
+  >
+    <div class="mas-announcement__inner">
+      <div class="mas-announcement__message">
+        {%- if section.settings.text != blank -%}
+          {%- if section.settings.link != blank -%}
+            <a class="mas-announcement__link" href="{{ section.settings.link }}">{{ section.settings.text }}</a>
+          {%- else -%}
+            <span>{{ section.settings.text }}</span>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.enable_countdown and section.settings.countdown_target != blank -%}
+          <span
+            class="mas-announcement__countdown"
+            data-mas-countdown
+            data-countdown-target="{{ section.settings.countdown_target | escape }}"
+            data-countdown-label="{{ section.settings.countdown_label | escape }}"
+            aria-live="polite"
+          ></span>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.closable -%}
+        <button class="mas-announcement__close" type="button" data-mas-announcement-close aria-label="{{ section.settings.close_label | escape }}">
+          {% render 'masarima-icon', icon: 'close' %}
+        </button>
+      {%- endif -%}
+    </div>
+  </aside>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "MASARIMA Announcement",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "text", "label": "Announcement text", "default": "Complimentary shipping on premium skincare rituals" },
+    { "type": "url", "id": "link", "label": "Announcement link" },
+    { "type": "checkbox", "id": "enable_countdown", "label": "Show countdown", "default": false },
+    { "type": "text", "id": "countdown_target", "label": "Countdown target", "info": "Use an ISO date such as 2026-07-15T20:00:00+05:30." },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "Ends in" },
+    { "type": "checkbox", "id": "closable", "label": "Allow customers to close", "default": true },
+    { "type": "text", "id": "close_label", "label": "Close button accessibility label", "default": "Close announcement" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#141210" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#F9F4ED" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#2B2824" },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 6, "max": 18, "step": 1, "unit": "px", "default": 10 }
+  ]
+}
+{% endschema %}

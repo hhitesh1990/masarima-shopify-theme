@@ -1,0 +1,118 @@
+<section
+  class="mas-hero mas-hero--align-{{ section.settings.text_alignment }} mas-hero--content-{{ section.settings.content_position }} mas-hero--product-{{ section.settings.product_position }}"
+  style="
+    --mas-hero-min-height-desktop: {{ section.settings.min_height_desktop }}vh;
+    --mas-hero-min-height-mobile: {{ section.settings.min_height_mobile }}svh;
+    --mas-hero-bg: {{ section.settings.background_color.red }}, {{ section.settings.background_color.green }}, {{ section.settings.background_color.blue }};
+    --mas-hero-text: {{ section.settings.text_color.red }}, {{ section.settings.text_color.green }}, {{ section.settings.text_color.blue }};
+    --mas-hero-muted: {{ section.settings.description_color.red }}, {{ section.settings.description_color.green }}, {{ section.settings.description_color.blue }};
+    --mas-hero-overlay: {{ section.settings.overlay_color.red }}, {{ section.settings.overlay_color.green }}, {{ section.settings.overlay_color.blue }};
+    --mas-hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --mas-hero-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+    --mas-hero-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --mas-hero-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+    --mas-hero-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --mas-hero-primary-bg: {{ section.settings.primary_button_background.red }}, {{ section.settings.primary_button_background.green }}, {{ section.settings.primary_button_background.blue }};
+    --mas-hero-primary-text: {{ section.settings.primary_button_text.red }}, {{ section.settings.primary_button_text.green }}, {{ section.settings.primary_button_text.blue }};
+    --mas-hero-secondary-bg: {{ section.settings.secondary_button_background.red }}, {{ section.settings.secondary_button_background.green }}, {{ section.settings.secondary_button_background.blue }};
+    --mas-hero-secondary-text: {{ section.settings.secondary_button_text.red }}, {{ section.settings.secondary_button_text.green }}, {{ section.settings.secondary_button_text.blue }};
+    --mas-hero-secondary-border: {{ section.settings.secondary_button_border.red }}, {{ section.settings.secondary_button_border.green }}, {{ section.settings.secondary_button_border.blue }};
+  "
+>
+  <div class="mas-hero__background" aria-hidden="true">
+    {%- if section.settings.desktop_video != blank -%}
+      {{ section.settings.desktop_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '2000x', class: 'mas-hero__video mas-hero__video--desktop' }}
+    {%- elsif section.settings.desktop_image != blank -%}
+      {{ section.settings.desktop_image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', class: 'mas-hero__background-image mas-hero__background-image--desktop', alt: '' }}
+    {%- endif -%}
+
+    {%- if section.settings.mobile_video != blank -%}
+      {{ section.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1200x', class: 'mas-hero__video mas-hero__video--mobile' }}
+    {%- elsif section.settings.mobile_image != blank -%}
+      {{ section.settings.mobile_image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 640, 800, 1000, 1200', sizes: '100vw', class: 'mas-hero__background-image mas-hero__background-image--mobile', alt: '' }}
+    {%- endif -%}
+    <span class="mas-hero__overlay"></span>
+  </div>
+
+  <div class="mas-hero__inner">
+    <div class="mas-hero__content motion-slide-up" data-animate>
+      {%- if section.settings.eyebrow != blank -%}<p class="mas-hero__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h1 class="mas-hero__heading display">{{ section.settings.heading }}</h1>{%- endif -%}
+      {%- if section.settings.description != blank -%}<div class="mas-hero__description rte">{{ section.settings.description }}</div>{%- endif -%}
+      <div class="mas-hero__buttons">
+        {%- if section.settings.primary_button_label != blank and section.settings.primary_button_link != blank -%}<a class="button mas-hero__button mas-hero__button--primary" href="{{ section.settings.primary_button_link }}">{{ section.settings.primary_button_label }}</a>{%- endif -%}
+        {%- if section.settings.secondary_button_label != blank and section.settings.secondary_button_link != blank -%}<a class="button mas-hero__button mas-hero__button--secondary" href="{{ section.settings.secondary_button_link }}">{{ section.settings.secondary_button_label }}</a>{%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="mas-hero__badges" aria-label="{{ section.settings.trust_badges_label | escape }}">
+          {%- for block in section.blocks limit: 4 -%}
+            {%- if block.type == 'trust_badge' and block.settings.text != blank -%}
+              <div class="mas-hero__badge" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  {{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy', widths: '24, 32, 48', sizes: '24px', class: 'mas-hero__badge-icon', alt: '' }}
+                {%- else -%}
+                  {% render 'masarima-icon', icon: 'check' %}
+                {%- endif -%}
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="mas-hero__product motion-scale" data-animate>
+      {%- if section.settings.product_image_desktop != blank -%}
+        {{ section.settings.product_image_desktop | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '360, 520, 720, 960, 1200, 1400', sizes: '(min-width: 990px) 48vw, 82vw', class: 'mas-hero__product-image mas-hero__product-image--desktop', alt: section.settings.product_image_alt }}
+      {%- endif -%}
+      {%- if section.settings.product_image_mobile != blank -%}
+        {{ section.settings.product_image_mobile | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '320, 480, 640, 780, 900', sizes: '82vw', class: 'mas-hero__product-image mas-hero__product-image--mobile', alt: section.settings.product_image_alt }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MASARIMA Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MASARIMA" },
+    { "type": "text", "id": "heading", "label": "Headline", "default": "Multi-Current™ Dual Phase Serum" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Inspired by Korean Skincare Science. Crafted for Indian Skin." },
+    { "type": "text", "id": "primary_button_label", "label": "Primary button label", "default": "Shop serum" },
+    { "type": "url", "id": "primary_button_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_button_label", "label": "Secondary button label", "default": "Explore science" },
+    { "type": "url", "id": "secondary_button_link", "label": "Secondary button link" },
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop background image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile background image" },
+    { "type": "video", "id": "desktop_video", "label": "Desktop background video" },
+    { "type": "video", "id": "mobile_video", "label": "Mobile background video" },
+    { "type": "image_picker", "id": "product_image_desktop", "label": "Desktop product image" },
+    { "type": "image_picker", "id": "product_image_mobile", "label": "Mobile product image" },
+    { "type": "text", "id": "product_image_alt", "label": "Product image alt text", "default": "Multi-Current Dual Phase Serum" },
+    { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "left" },
+    { "type": "select", "id": "content_position", "label": "Content vertical position", "options": [{ "value": "top", "label": "Top" }, { "value": "middle", "label": "Middle" }, { "value": "bottom", "label": "Bottom" }], "default": "middle" },
+    { "type": "select", "id": "product_position", "label": "Product position", "options": [{ "value": "right", "label": "Right" }, { "value": "left", "label": "Left" }], "default": "right" },
+    { "type": "range", "id": "min_height_desktop", "label": "Desktop height", "min": 80, "max": 110, "step": 5, "unit": "vh", "default": 100 },
+    { "type": "range", "id": "min_height_mobile", "label": "Mobile height", "min": 80, "max": 110, "step": 5, "unit": "vh", "default": 100 },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 20 },
+    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#141210" },
+    { "type": "color", "id": "background_color", "label": "Fallback background", "default": "#F4EFE8" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "description_color", "label": "Description color", "default": "#F9F4ED" },
+    { "type": "color", "id": "primary_button_background", "label": "Primary button background", "default": "#FFFFFF" },
+    { "type": "color", "id": "primary_button_text", "label": "Primary button text", "default": "#141210" },
+    { "type": "color", "id": "secondary_button_background", "label": "Secondary button background", "default": "#141210" },
+    { "type": "color", "id": "secondary_button_text", "label": "Secondary button text", "default": "#FFFFFF" },
+    { "type": "color", "id": "secondary_button_border", "label": "Secondary button border", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top_desktop", "label": "Desktop top spacing", "min": 48, "max": 180, "step": 6, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom_desktop", "label": "Desktop bottom spacing", "min": 48, "max": 180, "step": 6, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Mobile top spacing", "min": 48, "max": 150, "step": 6, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Mobile bottom spacing", "min": 48, "max": 150, "step": 6, "unit": "px", "default": 72 },
+    { "type": "text", "id": "trust_badges_label", "label": "Trust badge accessibility label", "default": "Product trust signals" }
+  ],
+  "blocks": [{ "type": "trust_badge", "name": "Trust badge", "settings": [{ "type": "image_picker", "id": "icon", "label": "Icon image" }, { "type": "text", "id": "text", "label": "Badge text", "default": "Premium skincare science" }] }],
+  "max_blocks": 4,
+  "presets": [{ "name": "MASARIMA Hero", "blocks": [{ "type": "trust_badge" }, { "type": "trust_badge" }, { "type": "trust_badge" }] }]
+}
+{% endschema %}

@@ -1,4 +1,70 @@
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "masarima_hero": {
+      "type": "masarima-hero",
+      "settings": {
+        "eyebrow": "MASARIMA",
+        "heading": "Multi-Current™ Dual Phase Serum",
+        "description": "Inspired by Korean Skincare Science. Crafted for Indian Skin.",
+        "primary_button_label": "Shop serum",
+        "secondary_button_label": "Explore science"
+      },
+      "blocks": {
+        "trust_1": {
+          "type": "trust_badge",
+          "settings": {
+            "text": "Korean skincare science"
+          }
+        },
+        "trust_2": {
+          "type": "trust_badge",
+          "settings": {
+            "text": "Crafted for Indian skin"
+          }
+        },
+        "trust_3": {
+          "type": "trust_badge",
+          "settings": {
+            "text": "Premium dual phase formula"
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3"]
+    },
+    "masarima_trust_strip": {
+      "type": "masarima-trust-strip",
+      "blocks": {
+        "trust_item_1": {
+          "type": "trust_item",
+          "settings": {
+            "heading": "Korean-inspired science",
+            "text": "Built around thoughtful skincare research."
+          }
+        },
+        "trust_item_2": {
+          "type": "trust_item",
+          "settings": {
+            "heading": "Made for Indian skin",
+            "text": "Designed for daily climate realities."
+          }
+        },
+        "trust_item_3": {
+          "type": "trust_item",
+          "settings": {
+            "heading": "Premium actives",
+            "text": "A refined ritual with high-performance care."
+          }
+        },
+        "trust_item_4": {
+          "type": "trust_item",
+          "settings": {
+            "heading": "Fast, clean storefront",
+            "text": "Optimized for a modern shopping experience."
+          }
+        }
+      },
+      "block_order": ["trust_item_1", "trust_item_2", "trust_item_3", "trust_item_4"]
+    }
+  },
+  "order": ["masarima_hero", "masarima_trust_strip"]
 }

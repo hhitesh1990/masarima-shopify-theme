@@ -1,0 +1,130 @@
+{%- liquid
+  assign header_menu = linklists[section.settings.menu]
+  assign transparent_header = false
+  if section.settings.transparent_over_hero and template.name == 'index'
+    assign transparent_header = true
+  endif
+-%}
+
+<header
+  class="mas-header{% if transparent_header %} mas-header--transparent{% endif %}{% if section.settings.sticky_header %} mas-header--sticky{% endif %}"
+  data-mas-header
+  data-transparent-header="{{ transparent_header }}"
+  style="
+    --mas-header-height: {{ section.settings.height }}px;
+    --mas-header-logo-width: {{ section.settings.logo_width }}px;
+    --mas-header-bg: {{ section.settings.background_color.red }}, {{ section.settings.background_color.green }}, {{ section.settings.background_color.blue }};
+    --mas-header-text: {{ section.settings.text_color.red }}, {{ section.settings.text_color.green }}, {{ section.settings.text_color.blue }};
+    --mas-header-transparent-text: {{ section.settings.transparent_text_color.red }}, {{ section.settings.transparent_text_color.green }}, {{ section.settings.transparent_text_color.blue }};
+    --mas-header-border: {{ section.settings.border_color.red }}, {{ section.settings.border_color.green }}, {{ section.settings.border_color.blue }};
+    --mas-header-glass-bg: {{ section.settings.glass_background.red }}, {{ section.settings.glass_background.green }}, {{ section.settings.glass_background.blue }};
+    --mas-header-glass-alpha: {{ section.settings.glass_opacity | divided_by: 100.0 }};
+    --mas-header-glass-blur: {{ section.settings.glass_blur }}px;
+    --mas-drawer-bg: {{ section.settings.mobile_drawer_background.red }}, {{ section.settings.mobile_drawer_background.green }}, {{ section.settings.mobile_drawer_background.blue }};
+  "
+>
+  <div class="mas-header__inner">
+    <button class="mas-header__icon-button mas-header__menu-button" type="button" data-mas-drawer-open aria-controls="MasHeaderDrawer-{{ section.id }}" aria-expanded="false" aria-label="{{ section.settings.mobile_menu_label | escape }}">
+      {% render 'masarima-icon', icon: 'menu' %}
+    </button>
+
+    <a class="mas-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 480 | image_tag: loading: 'eager', widths: '120, 180, 240, 320, 420, 480', sizes: '(min-width: 990px) 220px, 160px', alt: shop.name }}
+      {%- else -%}
+        <span>{{ section.settings.logo_text }}</span>
+      {%- endif -%}
+    </a>
+
+    {%- if header_menu.links != blank -%}
+      <nav class="mas-header__nav mas-header__nav--{{ section.settings.nav_alignment }}" aria-label="{{ section.settings.navigation_label | escape }}">
+        {%- for link in header_menu.links -%}
+          {%- if link.links != blank -%}
+            <details class="mas-header__nav-item">
+              <summary class="mas-header__nav-link">{{ link.title }} {% render 'masarima-icon', icon: 'arrow' %}</summary>
+              <div class="mas-header__submenu">
+                {%- for child_link in link.links -%}
+                  <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- else -%}
+            <a class="mas-header__nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="mas-header__actions">
+      {%- if section.settings.enable_search -%}
+        <a class="mas-header__icon-button" href="{{ routes.search_url }}" aria-label="{{ section.settings.search_label | escape }}">
+          {% render 'masarima-icon', icon: 'search' %}
+        </a>
+      {%- endif -%}
+      <a class="mas-header__icon-button" href="{{ routes.cart_url }}" aria-label="{{ section.settings.cart_label | escape }}">
+        {% render 'masarima-icon', icon: 'cart' %}
+        {%- if section.settings.show_cart_count and cart.item_count > 0 -%}
+          <span class="mas-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+
+  <div class="mas-header__drawer" id="MasHeaderDrawer-{{ section.id }}" data-mas-drawer hidden>
+    <button class="mas-header__drawer-overlay" type="button" data-mas-drawer-close aria-label="{{ section.settings.close_menu_label | escape }}"></button>
+    <div class="mas-header__drawer-panel" role="dialog" aria-modal="true" aria-label="{{ section.settings.mobile_menu_label | escape }}">
+      <div class="mas-header__drawer-top">
+        <span class="mas-header__drawer-logo">{{ section.settings.logo_text }}</span>
+        <button class="mas-header__icon-button" type="button" data-mas-drawer-close aria-label="{{ section.settings.close_menu_label | escape }}">
+          {% render 'masarima-icon', icon: 'close' %}
+        </button>
+      </div>
+      {%- if header_menu.links != blank -%}
+        <nav class="mas-header__drawer-nav" aria-label="{{ section.settings.mobile_navigation_label | escape }}">
+          {%- for link in header_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- for child_link in link.links -%}
+              <a class="mas-header__drawer-child" href="{{ child_link.url }}">{{ child_link.title }}</a>
+            {%- endfor -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+      <div class="mas-header__drawer-actions">
+        {%- if section.settings.enable_search -%}<a class="button button--outline" href="{{ routes.search_url }}">{{ section.settings.search_label }}</a>{%- endif -%}
+        <a class="button" href="{{ routes.cart_url }}">{{ section.settings.cart_label }}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "MASARIMA Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "text", "id": "logo_text", "label": "Logo text fallback", "default": "MASARIMA" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 80, "max": 260, "step": 10, "unit": "px", "default": 150 },
+    { "type": "link_list", "id": "menu", "label": "Desktop and mobile menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky_header", "label": "Enable sticky header", "default": true },
+    { "type": "checkbox", "id": "transparent_over_hero", "label": "Transparent over homepage hero", "default": true },
+    { "type": "range", "id": "height", "label": "Header height", "min": 56, "max": 96, "step": 4, "unit": "px", "default": 72 },
+    { "type": "select", "id": "nav_alignment", "label": "Navigation alignment", "options": [{ "value": "center", "label": "Center" }, { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }], "default": "center" },
+    { "type": "checkbox", "id": "enable_search", "label": "Show search icon", "default": true },
+    { "type": "checkbox", "id": "show_cart_count", "label": "Show cart count", "default": true },
+    { "type": "color", "id": "background_color", "label": "Header background", "default": "#FBF8F4" },
+    { "type": "color", "id": "text_color", "label": "Header text", "default": "#141210" },
+    { "type": "color", "id": "transparent_text_color", "label": "Transparent header text", "default": "#FFFFFF" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#E3DED7" },
+    { "type": "color", "id": "glass_background", "label": "Scrolled glass background", "default": "#FBF8F4" },
+    { "type": "range", "id": "glass_opacity", "label": "Scrolled glass opacity", "min": 40, "max": 100, "step": 5, "unit": "%", "default": 80 },
+    { "type": "range", "id": "glass_blur", "label": "Scrolled glass blur", "min": 0, "max": 28, "step": 2, "unit": "px", "default": 16 },
+    { "type": "color", "id": "mobile_drawer_background", "label": "Mobile drawer background", "default": "#FBF8F4" },
+    { "type": "text", "id": "navigation_label", "label": "Desktop navigation ARIA label", "default": "Primary navigation" },
+    { "type": "text", "id": "mobile_navigation_label", "label": "Mobile navigation ARIA label", "default": "Mobile navigation" },
+    { "type": "text", "id": "mobile_menu_label", "label": "Open menu label", "default": "Open menu" },
+    { "type": "text", "id": "close_menu_label", "label": "Close menu label", "default": "Close menu" },
+    { "type": "text", "id": "search_label", "label": "Search label", "default": "Search" },
+    { "type": "text", "id": "cart_label", "label": "Cart label", "default": "Cart" }
+  ]
+}
+{% endschema %}

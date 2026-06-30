@@ -1,0 +1,48 @@
+<section
+  class="mas-trust-strip{% if section.settings.mobile_slider %} mas-trust-strip--mobile-slider{% endif %}"
+  style="
+    --mas-trust-bg: {{ section.settings.background_color.red }}, {{ section.settings.background_color.green }}, {{ section.settings.background_color.blue }};
+    --mas-trust-text: {{ section.settings.text_color.red }}, {{ section.settings.text_color.green }}, {{ section.settings.text_color.blue }};
+    --mas-trust-muted: {{ section.settings.muted_color.red }}, {{ section.settings.muted_color.green }}, {{ section.settings.muted_color.blue }};
+    --mas-trust-border: {{ section.settings.border_color.red }}, {{ section.settings.border_color.green }}, {{ section.settings.border_color.blue }};
+    --mas-trust-padding-y: {{ section.settings.padding_y }}px;
+  "
+>
+  <div class="mas-trust-strip__inner">
+    {%- if section.settings.heading != blank -%}<h2 class="visually-hidden">{{ section.settings.heading }}</h2>{%- endif -%}
+    <div class="mas-trust-strip__track" role="list" aria-label="{{ section.settings.list_label | escape }}">
+      {%- for block in section.blocks limit: 4 -%}
+        <article class="mas-trust-strip__item motion-fade" role="listitem" data-animate {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            {{ block.settings.icon | image_url: width: 72 | image_tag: loading: 'lazy', widths: '32, 48, 72', sizes: '36px', class: 'mas-trust-strip__icon', alt: '' }}
+          {%- else -%}
+            <span class="mas-trust-strip__icon-placeholder" aria-hidden="true">{% render 'masarima-icon', icon: 'check' %}</span>
+          {%- endif -%}
+          <div class="mas-trust-strip__copy">
+            {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MASARIMA Trust strip",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "MASARIMA trust signals" },
+    { "type": "text", "id": "list_label", "label": "Trust item list ARIA label", "default": "Trust signals" },
+    { "type": "checkbox", "id": "mobile_slider", "label": "Enable mobile slider", "default": true },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#FBF8F4" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#141210" },
+    { "type": "color", "id": "muted_color", "label": "Body text color", "default": "#5F5952" },
+    { "type": "color", "id": "border_color", "label": "Divider color", "default": "#E3DED7" },
+    { "type": "range", "id": "padding_y", "label": "Vertical spacing", "min": 20, "max": 72, "step": 4, "unit": "px", "default": 36 }
+  ],
+  "blocks": [{ "type": "trust_item", "name": "Trust item", "settings": [{ "type": "image_picker", "id": "icon", "label": "Icon image" }, { "type": "text", "id": "heading", "label": "Heading", "default": "Premium skincare standard" }, { "type": "text", "id": "text", "label": "Text", "default": "Editable trust detail for the brand." }] }],
+  "max_blocks": 4,
+  "presets": [{ "name": "MASARIMA Trust strip", "blocks": [{ "type": "trust_item" }, { "type": "trust_item" }, { "type": "trust_item" }, { "type": "trust_item" }] }]
+}
+{% endschema %}

@@ -23,11 +23,15 @@
     {{ 'component-media.css' | asset_url | stylesheet_tag }}
     {{ 'utilities.css' | asset_url | stylesheet_tag }}
     {{ 'animations.css' | asset_url | stylesheet_tag }}
+    {{ 'masarima-sprint-2.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'masarima-sprint-2.js' | asset_url }}" defer="defer"></script>
   </head>
 
   <body class="template-{{ template.name | handle }}" data-animations="{{ settings.enable_animations }}">
     <a class="skip-to-content-link button button--text" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+    {% section 'masarima-announcement-bar' %}
+    {% section 'masarima-header' %}
 
     <main id="MainContent" class="main-content" role="main" tabindex="-1">
       {{ content_for_layout }}
